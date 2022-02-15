@@ -1,12 +1,15 @@
-.button{
-    background-color: #741b75;
-  }
-.button:visited{
-    background-color: #741b75;
-}
-.button:hover{
-   background-color:#49114a;
-}
+
 body {
-   background-color: gray;
+   background-color: lightgray;
+}
+
+.menu li a{
+   color: lightgray;
+}
+.menu li a:hover{
+   background-color: #49114a;
+}
+
+.menu-text{
+   font-weight: bold;
 }

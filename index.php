@@ -1,8 +1,10 @@
 <?php
-session_start();
+require_once 'Funciones/conexion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
+</html>
 
 <head>
 	<title>Entrada</title>
@@ -16,28 +18,20 @@ session_start();
 </head>
 
 <body>
-	<!--Menu Provisional-->
-	<div class="top-bar">
-		<div class="top-bar-left">
-			<ul class="menu">
-				<li class="menu-text">Blog</li>
-				<li><a href="#">One</a></li>
-				<li><a href="#">Two</a></li>
-				<li><a href="#">Three</a></li>
-			</ul>
-		</div>
-	</div>
+	<?php
+	require 'menu.html';
+	?>
 
 	<!--Botones de Login y Registro-->
 	<div class="work-feature-block row">
 		<div class="row column text-center">
-			<div><a href="login.php" class="button">Login</a></div>
-			<div><a href="registro.php" class="button">Registro</a></div>
+			<div><a href="login.php" class="button large">Login</a></div>
+			<div><a href="registro.php" class="button large">Registro</a></div>
 		</div>
 	</div>
 
 
-	<<script src="js/vendor/jquery-2.1.4.min.js">
+	<script src="js/vendor/jquery-2.1.4.min.js">
 		</script>
 		<script src="js/vendor/foundation.js"></script>
 		<script>
@@ -46,8 +40,3 @@ session_start();
 </body>
 
 </html>
-
-<!--
-
--->
--->

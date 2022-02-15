@@ -1,0 +1,5 @@
+morado normal del boton: 741b75
+morado hover boton: 49114a
+morado visited boton: 741b75
+color fondo: lightgray
+top bar: 741b75

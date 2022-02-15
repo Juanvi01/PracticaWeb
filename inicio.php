@@ -1,3 +1,6 @@
+<?php
+require_once 'Funciones/conexion.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,13 +15,16 @@
 </head>
 
 <body>
+    <?php
+    require 'menu.html';
+    ?>
     <p>Inicio</p>
 
     <script src="js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="js/vendor/foundation.js"></script>
-    <script>
-        $(document).foundation();
-    </script>
+  <script src="js/vendor/foundation.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 <?php
-require '../conexion.php';
+require_once '../conexion.php';
 require 'usuarioExiste.php';// $usu se coge del usuarioExiste.php
 
 $sql = "SELECT Pass from usuarios where usuario = '". $usu ."'";   
-$result = $con->query($sql);
+$result = $_SESSION["con"]->query($sql);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

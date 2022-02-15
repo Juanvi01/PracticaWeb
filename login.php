@@ -1,3 +1,6 @@
+<?php
+require_once 'Funciones/conexion.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,6 +16,9 @@
 </head>
 
 <body>
+	<?php
+	require 'menu.html';
+	?>
 	<div>
 		<form method="post" action="Funciones/comprobarPass.php">
 			<label for="Usuario">Nombre de usuario:</label>
@@ -26,9 +32,7 @@
 	// Usuario por defecto
 	$usuario = $pass = "a";
 	$_SESSION["con"];
-	require 'conexion.php';
 	//mysqli_close($conn);
-
 	// Quita los espacios, barras y caracteres especiales para que no pongan una URL
 	function test_input($data)
 	{
