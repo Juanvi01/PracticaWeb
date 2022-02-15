@@ -1,0 +1,12 @@
+.button{
+    background-color: #741b75;
+  }
+.button:visited{
+    background-color: #741b75;
+}
+.button:hover{
+   background-color:#49114a;
+}
+body {
+   background-color: gray;
+}
