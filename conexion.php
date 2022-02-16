@@ -2,7 +2,7 @@
 <?php
 $server = "localhost";
 $user = "root";
-$pass = "root";
+$pass = "marisma";
 $bd = "hlc_practicaweb";
 
 $_SESSION["con"] = new mysqli($server, $user, $pass, $bd);

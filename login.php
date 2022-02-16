@@ -19,18 +19,20 @@ require_once 'Funciones/conexion.php';
 	<?php
 	require 'menu.html';
 	?>
-	<div>
-		<form method="post" action="Funciones/comprobarPass.php">
-			<label for="Usuario">Nombre de usuario:</label>
-			<input type="text" id="Usuario" name="Usuario"><br><br>
-			<label for="Pass">Contraseña:</label>
-			<input type="text" id="Pass" name="Pass"><br><br>
-			<input class="button" type="submit" value="Iniciar sesión"></input>
-		</form>
+	<div class="row medium-6 large-5 columns" id="top">
+		<div class="blog-post">
+			<form method="post" action="Funciones/comprobarPass.php">
+				<label for="Usuario">Nombre de usuario:
+					<input type="text" id="Usuario" name="Usuario">
+				</label>
+				<label style="margin-top: 5rem;"for="Pass">Contraseña:
+					<input type="password" id="Pass" name="Pass">
+				</label>
+				<input style="display: block; margin: auto; margin-top:5rem;" class="button large" type="submit" value="Iniciar sesión"></input>
+			</form>
+		</div>
 	</div>
 	<?php
-	// Usuario por defecto
-	$usuario = $pass = "a";
 	$_SESSION["con"];
 	//mysqli_close($conn);
 	// Quita los espacios, barras y caracteres especiales para que no pongan una URL

@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Nombre` varchar(50) DEFAULT NULL,
   `Sexo` varchar(10) DEFAULT NULL,
   `FechaNac` date DEFAULT NULL,
+  `Avatar` blob,
   PRIMARY KEY (`Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

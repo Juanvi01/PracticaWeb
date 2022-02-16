@@ -1,15 +1,6 @@
-
 body {
    background-color: lightgray;
 }
-
-.menu li a{
-   color: lightgray;
-}
-.menu li a:hover{
-   background-color: #49114a;
-}
-
-.menu-text{
-   font-weight: bold;
+.error{
+   color: red;
 }

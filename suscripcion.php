@@ -17,6 +17,10 @@ require_once 'Funciones/conexion.php';
 <body>
 	<?php
 	require 'menu.html';
+
+	if(!isset($_SESSION['Usuario'])){
+		header("location: index.php");
+	}
 	?>
 	<p>Suscripciones</p>
 	<script src="js/vendor/jquery-2.1.4.min.js"></script>

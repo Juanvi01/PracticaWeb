@@ -10,8 +10,7 @@ require_once 'Funciones/conexion.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/menu.css">
+	  <link href="css/app.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
