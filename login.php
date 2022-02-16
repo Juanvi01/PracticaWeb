@@ -18,21 +18,28 @@ require_once 'Funciones/conexion.php';
 <body>
 	<?php
 	require 'menu.html';
+	require 'Funciones/comprobarPass.php';
 	?>
+
 	<div class="row medium-6 large-5 columns" id="top">
 		<div class="blog-post">
-			<form method="post" action="Funciones/comprobarPass.php">
-				<label for="Usuario">Nombre de usuario:
-					<input type="text" id="Usuario" name="Usuario">
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+				<label style="color: white;"for="Usuario">Nombre de usuario:
+					<input type="text" id="Usuario" name="Usuario" value="<?php echo $usu ?>">
+					<span class="error"><?php echo $errorNoUsu ?></span>
 				</label>
-				<label style="margin-top: 5rem;"for="Pass">Contraseña:
+				<label style="margin-top: 5rem; color: white;" for="Pass">Contraseña:
 					<input type="password" id="Pass" name="Pass">
+					<span class="error"><?php echo $errorPass ?></span>
 				</label>
+				<label><a style="color: white; text-decoration:underline;" href="registro.php">¿Aún no tienes una cuenta?</a></label>
 				<input style="display: block; margin: auto; margin-top:5rem;" class="button large" type="submit" value="Iniciar sesión"></input>
 			</form>
 		</div>
 	</div>
 	<?php
+
+
 	$_SESSION["con"];
 	//mysqli_close($conn);
 	// Quita los espacios, barras y caracteres especiales para que no pongan una URL

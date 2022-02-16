@@ -1,46 +1,41 @@
 <?php
-require_once '../conexion.php';
-
-function formatear($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-if(require 'usuarioExiste.php'){
-    $errorNombre = $errorUsuario = $errorPass = $errorFecha = "";
-    $error = false;
-    $usuario = $pass = $nombre = $fechanac = "";
+    function formatear($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
+    $errorNombre = $errorUsuario = $errorRepPass = $errorPass = $errorYaRegistrado = $errorFecha = $imgContent = null;
+    $tieneMayus = $tieneNum = $error = false;
+    $usuario = $pass = $repPass = $nombre = $fechanac = $sexo = "";
+    $tieneMayus = $tieneNum = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $sexo = $_POST["Sexo"];
         // Nombre
         if (empty($_POST["Nombre"])) { // Si esta vacío salta error
             $errorNombre = "Escribe un nombre.";
             $error = true;
-        } 
-        else 
-        {
+        } else {
             $nombre = formatear($_POST["Nombre"]);
             // Revisa la integridad del texto
             // Solo letras
-            if(!preg_match("/[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]{10}/", $nombre)){
+            if (!preg_match("/^[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]{10,}$/", $nombre)) {
                 $errorNombre = "El nombre no es correcto.";
-                $error=true;
+                $error = true;
             }
         }
         // Usuario
         if (empty($_POST["Usuario"])) { // Si esta vacío salta error
             $errorUsuario = "Escribe un usuario.";
             $error = true;
-        }
-        else
-        {
+        } else {
             $usuario = formatear($_POST["Usuario"]);
             // Revisa la integridad del texto
             // Empieza por una letra y el resto son letras o numeros
-            if(!preg_match("/[A-Za-z][A-Za-z0-9]{8}/", $usuario)){
+            if (!preg_match("/^[A-Za-zñÑáéíóúÁÉÍÓÚÄËÏÖÜäëïöüàèìòùÀÈÌÔÙ][A-Za-zñÑáéíóúÁÉÍÓÚÄËÏÖÜäëïöüàèìòùÀÈÌÔÙ0-9]{7,}$/", $usuario)) {
                 $errorUsuario = "El nombre de usuario no es correcto.";
                 $error = true;
             }
@@ -49,24 +44,43 @@ if(require 'usuarioExiste.php'){
         if (empty($_POST["Pass"])) { // Si esta vacío salta error
             $errorPass = "Escribe una contraseña valida.";
             $error = true;
-        }
-        else
-        {
+        } else {
             $pass = formatear($_POST["Pass"]);
             // Revisa la integridad del texto
             // mínimo 8 caracteres alfanuméricos/especiales. Al menos una letra mayúscula y un número.
-            if(!preg_match("/[A-a-z][0-9]{8.}/", $pass)){
-                $errorUsuario = "El nombre de usuario no es correcto.";
+            $tieneMayus = $tieneNum = false;
+            for($i=0; $i<strlen($pass); $i+=1){
+                if (preg_match('`[A-Z]`', $pass)) {
+                    $tieneMayus = true;
+                }
+                if (preg_match('`[0-9]`', $pass)) {
+                    $tieneNum=true;
+                }
+            }
+            if(!$tieneMayus && !$tieneNum){
+                $errorPass = "La contraseña debe contener una mayúscula y un número.";
+                $error=true;
+            }else if(!$tieneMayus){
+                $errorPass = "La contraseña debe contener una mayúscula.";
+                $error=true;
+            }else if(!$tieneNum){
+                $errorPass = "La contraseña debe contener un número.";
+                $error=true;
+            }
+
+            //Comprueba el repetir contraseña
+            $repPass = $_POST["RepPass"];
+            if($pass != $repPass){
+                $errorRepPass = "Las contraseñas no coinciden.";
                 $error = true;
             }
         }
         // Fecha de nacimiento
-        if(empty($_POST["FechaNac"])) { // Si esta vacío salta error
+        if (empty($_POST["FechaNac"])) { // Si esta vacío salta error
             $errorFecha = "Selecciona una fecha.";
             $error = true;
-        }
-        else
-        {
+        } else {
+            $fechanac = date('Y-m-d', strtotime($_POST["FechaNac"]));
             $fecha_actual = strtotime(date("Y-m-d"));
             $fecha_entrada = strtotime($_POST["FechaNac"] . "+ 16 year");
             if ($fecha_actual < $fecha_entrada) {
@@ -74,27 +88,39 @@ if(require 'usuarioExiste.php'){
                 $error = true;
             }
         }
-        
-    }
-    
-    if(!$error){
-        $sql = "INSERT INTO usuarios VALUES ('".$usuario ."', '". $pass ."', '". 
-                $nombre. "', '". $_POST["Sexo"] ."' , '". date('Y-m-d', strtotime($_POST["FechaNac"])) ."')";
-        if ($_SESSION["con"]->query($sql)===TRUE) {
-            echo '<p class="success">Te has registrado correctamente</p>';
-        } else {
-            echo '<p class="error">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
+        if ($_FILES['Avatar']['name'] != null) {
+            $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
+            if ($check !== false) {
+                $image = $_FILES['Avatar']['tmp_name'];
+                $imgContent = addslashes(file_get_contents($image));
+            }
+        }else {
+            if (!$error && !empty($_POST["sexo"])) {
+                if ($sexo == "Mujer") {
+                    $imgContent = addslashes(file_get_contents("Recursos/usuariom.png"));
+                } else {
+                    $imgContent = addslashes(file_get_contents("Recursos/usuarioh.png"));
+                }
+            }
         }
-        header("location: ../login.php");
-    }else{
-        echo '<p class="error">No se te ha registrado.</p>';
-        echo $errorNombre;
-        echo $errorPass;
-        echo $errorUsuario;
-        echo $errorFecha;
-        header("location: ../registro.php");
+
+        if (!$error) {
+            try{
+                $sql = "INSERT INTO usuarios 
+                    (Usuario, Pass, Nombre, Sexo, FechaNac, Avatar) 
+                    VALUES (
+                    '" . $usuario . "', '" . $pass . "', '" .$nombre . "', '" . $sexo . "' , '" . 
+                    $fechanac . "', '" . $imgContent . "')";
+
+                if ($_SESSION["con"]->query($sql) === TRUE) {
+                    echo '<p class="callout success">Te has registrado correctamente</p>';
+                } else {
+                    echo '<p class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
+                }
+                header("location: login.php");
+            }catch(mysqli_sql_exception $errorSQL){
+                $errorYaRegistrado = "Ya está registrado un usuario con ese nombre.";
+            }
+        }
     }
-}else{
-    echo"Creado antes";
-}
-?>
+    ?>

@@ -1,6 +1,24 @@
 body {
-   background-color: lightgray;
+   background-image: url("../Recursos/fondo2.jpg");
+   background-color: #cccccc;
+   background-position: center; 
+
+   background-size: cover; 
 }
+
 .error{
    color: red;
+}
+
+h1{
+    color: #741b75;
+    margin-top: 2vw;
+}
+
+h2{
+    color: #741b75;
+}
+
+.margenIzq{
+   margin-left: 4vw;
 }

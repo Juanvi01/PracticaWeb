@@ -18,6 +18,22 @@ DROP DATABASE IF EXISTS `hlc_practicaweb`;
 CREATE DATABASE IF NOT EXISTS `hlc_practicaweb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `hlc_practicaweb`;
 
+-- Volcando estructura para tabla hlc_practicaweb.suscripciones
+DROP TABLE IF EXISTS `suscripciones`;
+CREATE TABLE IF NOT EXISTS `suscripciones` (
+  `Suscripcion` varchar(10) NOT NULL,
+  PRIMARY KEY (`Suscripcion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Volcando datos para la tabla hlc_practicaweb.suscripciones: ~3 rows (aproximadamente)
+DELETE FROM `suscripciones`;
+/*!40000 ALTER TABLE `suscripciones` DISABLE KEYS */;
+INSERT INTO `suscripciones` (`Suscripcion`) VALUES
+	('Basic'),
+	('Gold'),
+	('Premium');
+/*!40000 ALTER TABLE `suscripciones` ENABLE KEYS */;
+
 -- Volcando estructura para tabla hlc_practicaweb.usuarios
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -26,8 +42,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `Nombre` varchar(50) DEFAULT NULL,
   `Sexo` varchar(10) DEFAULT NULL,
   `FechaNac` date DEFAULT NULL,
-  `Avatar` blob,
-  PRIMARY KEY (`Usuario`)
+  `Avatar` longblob, 
+  `Suscripcion` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`Usuario`),
+  KEY `FKSuscripcion` (`Suscripcion`),
+  CONSTRAINT `FKSuscripcion` FOREIGN KEY (`Suscripcion`) REFERENCES `suscripciones` (`Suscripcion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla hlc_practicaweb.usuarios: ~0 rows (aproximadamente)

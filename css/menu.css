@@ -2,6 +2,9 @@
     font-weight: bold;
     color: white;
 }
+#iniciarSesion{
+    color: white;
+}
 .menu li a{
     color: lightgray;
 }

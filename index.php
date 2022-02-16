@@ -22,21 +22,19 @@ require_once 'Funciones/conexion.php';
 	require 'menu.html';
 	?>
 
-	<!--Botones de Login y Registro-->
-	<div class="work-feature-block row">
-		<div class="row column text-center">
-			<div><a href="login.php" class="button large">Login</a></div>
-			<div><a href="registro.php" class="button large">Registro</a></div>
+	<div class="work-feature-block row" id="centrar">
+		<div class="row column text-center" >
+			<h1 >Bienvenido a Diabetes Software SL</h1>
 		</div>
 	</div>
 
 
 	<script src="js/vendor/jquery-2.1.4.min.js">
-		</script>
-		<script src="js/vendor/foundation.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
+	</script>
+	<script src="js/vendor/foundation.js"></script>
+	<script>
+		$(document).foundation();
+	</script>
 </body>
 
 </html>

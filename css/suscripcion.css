@@ -1,0 +1,21 @@
+.tabs-title a{
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #741b75;
+}
+.tabs-title a:hover{
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #49114a;
+}
+
+.tabs{
+    margin-top: 4vh;
+}
+
+#premium > a[aria-selected="true"] {
+    color: rgb(180, 72, 72);
+}
+#gold > a[aria-selected="true"] {
+    color: goldenrod;
+}
