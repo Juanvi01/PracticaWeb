@@ -16,9 +16,11 @@ require_once 'Funciones/conexion.php';
 
 <body></body>
   <?php
-  require 'menu.html';
   if (!$_SESSION['Iniciada']) {
     header("location: index.php");
+    require 'menu.html';
+  }else{
+    require 'menu.php';
   }
   ?>
   <div class="margenIzq">

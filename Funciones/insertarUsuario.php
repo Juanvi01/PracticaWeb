@@ -95,7 +95,7 @@
                 $imgContent = addslashes(file_get_contents($image));
             }
         }else {
-            if (!$error && !empty($_POST["sexo"])) {
+            if (!$error && !empty($_POST["Sexo"])) {
                 if ($sexo == "Mujer") {
                     $imgContent = addslashes(file_get_contents("Recursos/usuariom.png"));
                 } else {
@@ -106,6 +106,7 @@
 
         if (!$error) {
             try{
+                echo $imgContent;
                 $sql = "INSERT INTO usuarios 
                     (Usuario, Pass, Nombre, Sexo, FechaNac, Avatar) 
                     VALUES (

@@ -17,11 +17,14 @@ require_once 'Funciones/conexion.php';
 
 <body>
 	<?php
-	require 'menu.html';
+	
 
 	// Si no está iniciada la sesión, se redirige
 	if (!$_SESSION['Iniciada']) {
+		require 'menu.html';
 		header("location: index.php");
+	}else{
+		require 'menu.php';
 	}
 	?>
 

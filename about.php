@@ -16,9 +16,14 @@ require_once 'Funciones/conexion.php';
 
 <body>
     <?php
+  if (!$_SESSION['Iniciada']) {
     require 'menu.html';
+  }else{
+    require 'menu.php';
+  }
     ?>
     <div class="margenIzq">
+        <div class="blanca">
         <h1>Sobre nosotros</h1>
         <image src="Recursos/logo.png" class="logo" 
                 alt="Imagen del logo" title="Logo de Diabetes Software"/>
@@ -28,6 +33,8 @@ require_once 'Funciones/conexion.php';
             de los millones de diabéticos del mundo.
         </p>
         <p>Los socios de la empresa son Mario Hidalgo, Juan Vicente Ramos y Andrés Gómez.</p>
+
+        </div>
     </div>
 
     <script src="js/vendor/jquery-2.1.4.min.js"></script>

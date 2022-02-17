@@ -17,7 +17,11 @@ require_once 'Funciones/conexion.php';
 
 <body>
 	<?php
-	require 'menu.html';
+  if (!$_SESSION['Iniciada']) {
+    require 'menu.html';
+  }else{
+    require 'menu.php';
+  }
 	require 'Funciones/comprobarPass.php';
 	?>
 
