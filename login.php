@@ -17,7 +17,7 @@ require_once 'Funciones/conexion.php';
 
 <body>
 	<?php
-  if (!$_SESSION['Iniciada']) {
+  if (!isset($_SESSION['Usuario'])) {
     require 'menu.html';
   }else{
     require 'menu.php';

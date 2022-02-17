@@ -20,7 +20,7 @@ require_once 'Funciones/conexion.php';
 	
 
 	// Si no está iniciada la sesión, se redirige
-	if (!$_SESSION['Iniciada']) {
+	if (!isset($_SESSION['Usuario'])) {
 		require 'menu.html';
 		header("location: index.php");
 	}else{

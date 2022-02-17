@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $pass = $_POST["Pass"];
                 if ($row["Pass"] == $pass) {
                     // Iniciamos la sesión
-                    $_SESSION['Iniciada'] = true;
                     $_SESSION['Usuario'] = $usu;
                     $_SESSION['Pass'] = $row["Pass"];
                     $_SESSION['Nombre'] = $row["Nombre"];
