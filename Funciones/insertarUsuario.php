@@ -96,17 +96,19 @@
             }
         }else {
             if (!$error && !empty($_POST["Sexo"])) {
+                echo "HOLA";
                 if ($sexo == "Mujer") {
-                    $imgContent = addslashes(file_get_contents("Recursos/usuariom.png"));
+                    echo "Mujer";
+                    $imgContent = addslashes(file_get_contents("Recursos/avatarm.jpg"));
                 } else {
-                    $imgContent = addslashes(file_get_contents("Recursos/usuarioh.png"));
+                    echo "Hombre";
+                    $imgContent = addslashes(file_get_contents("Recursos/avatarh.jpg"));
                 }
             }
         }
 
         if (!$error) {
             try{
-                echo $imgContent;
                 $sql = "INSERT INTO usuarios 
                     (Usuario, Pass, Nombre, Sexo, FechaNac, Avatar) 
                     VALUES (
@@ -118,7 +120,7 @@
                 } else {
                     echo '<p class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
                 }
-                header("location: login.php");
+                //header("location: login.php");
             }catch(mysqli_sql_exception $errorSQL){
                 $errorYaRegistrado = "Ya está registrado un usuario con ese nombre.";
             }

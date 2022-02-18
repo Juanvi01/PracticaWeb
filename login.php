@@ -1,5 +1,10 @@
 <?php
 require_once 'Funciones/conexion.php';
+
+//Cookie de intentos
+if(!isset($_COOKIE["Intentos"])){
+    setcookie("Intentos", 3, time() + (5*60), "/");// 5 min
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
