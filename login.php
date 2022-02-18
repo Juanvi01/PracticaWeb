@@ -1,10 +1,10 @@
 <?php
+/*if(!isset($_COOKIE["Intentos"])){
+	setcookie("Intentos", 2, time() + 10, "/");// 5 min
+}*/
 require_once 'Funciones/conexion.php';
 
-//Cookie de intentos
-if(!isset($_COOKIE["Intentos"])){
-    setcookie("Intentos", 3, time() + (5*60), "/");// 5 min
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,12 +27,14 @@ if(!isset($_COOKIE["Intentos"])){
   }else{
     require 'menu.php';
   }
+
 	require 'Funciones/comprobarPass.php';
 	?>
 
 	<div class="row medium-6 large-5 columns" id="top">
 		<div class="blog-post">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+					<span class="error"><?php echo $errorIntentos ?></span>
 				<label style="color: white;"for="Usuario">Nombre de usuario:
 					<input type="text" id="Usuario" name="Usuario" value="<?php echo $usu ?>">
 					<span class="error"><?php echo $errorNoUsu ?></span>

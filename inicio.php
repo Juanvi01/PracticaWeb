@@ -14,7 +14,7 @@ require_once 'Funciones/conexion.php';
   <link href="css/inicio.css" rel="stylesheet" type="text/css">
 </head>
 
-<body></body>
+<body>
   <?php
   if (!isset($_SESSION['Usuario'])) {
     header("location: index.php");
