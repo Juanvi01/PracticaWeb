@@ -101,30 +101,51 @@
                 $image = $_FILES['Avatar']['tmp_name'];
                 $imgContent = addslashes(file_get_contents($image));
             }
-        }else {
-            if (!$error && !empty($_POST["Sexo"])) {
-                if ($sexo == "Mujer") {
-                    $imgContent = addslashes(file_get_contents("Recursos/avatarm.jpg"));
-                } else {
-                    $imgContent = addslashes(file_get_contents("Recursos/avatarh.jpg"));
-                }
-            }
         }
 
         if (!$error) {
             try{
-                $sql = "INSERT INTO usuarios 
-                    (Usuario, Pass, Nombre, Sexo, FechaNac, Avatar) 
-                    VALUES (
-                    '" . $usuario . "', '" . $pass . "', '" .$nombre . "', '" . $sexo . "' , '" . 
-                    $fechanac . "', '" . $imgContent . "')";
+                if ($_FILES['Avatar']['name'] != null) {
+                    $sql = "UPDATE usuarios SET
+                        USUARIO = '" . $usuario . "', 
+                        PASS = '" . $pass . "', 
+                        NOMBRE = '" . $nombre . "', 
+                        SEXO = '" . $sexo . "' , 
+                        FECHANAC = '" . $fechanac . "', 
+                        AVATAR = '" . $imgContent . "'
+                        WHERE USUARIO = '". $_SESSION['Usuario'] ."'";
+                        $_SESSION['Avatar'] = $imgContent;
+                }else{
+                    $sql = "UPDATE usuarios SET
+                        USUARIO = '" . $usuario . "', 
+                        PASS = '" . $pass . "', 
+                        NOMBRE = '" .$nombre . "', 
+                        SEXO = '" . $sexo . "' , 
+                        FECHANAC = '" . $fechanac . "'
+                        WHERE USUARIO = '". $_SESSION['Usuario'] ."'";
+                }
 
                 if ($_SESSION["con"]->query($sql) === TRUE) {
-                    echo '<p class="callout success">Te has registrado correctamente</p>';
+                    echo '<p style="position:fixed; bottom:-16px; width:100%"; class="callout success">Te has registrado correctamente</p>';
+                    // Actualizamos la sesion
+                    $_SESSION['Usuario'] = $usuario;
+                    $_SESSION['Pass'] = $pass;
+                    $_SESSION['Nombre'] = $nombre;
+                    $_SESSION['FechaNac'] = $fechanac;
+                    $_SESSION['Sexo'] = $sexo;
+                    
+                    // Cargamos la foto de la BD
+                    $sql = "SELECT Avatar from usuarios where usuario = '" . $usuario . "'";
+                    $result = $_SESSION["con"]->query($sql);
+                    if ($result->num_rows > 0) {
+                        if ($row = $result->fetch_assoc()) {
+                            $_SESSION['Avatar'] = $row["Avatar"];
+                        }
+                    }
                 } else {
-                    echo '<p class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
+                    echo '<p style="position:fixed; bottom:-16px; width:100%"; class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
                 }
-                header("location: prefil.php");
+                //header("location: perfil.php");
             }catch(mysqli_sql_exception $errorSQL){
                 $errorYaRegistrado = "Ya está registrado un usuario con ese nombre.";
             }

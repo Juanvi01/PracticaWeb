@@ -21,6 +21,11 @@ require_once 'Funciones/conexion.php';
     require 'menu.html';
   }else{
     require 'menu.php';
+    // Actualizamos la visita
+    $sql = "UPDATE visita 
+            SET IdPagina = 'inicio.php' 
+            WHERE IdUsuario = '". $_SESSION['Usuario'] ."'";
+    $_SESSION["con"]->query($sql);
   }
   ?>
   <div class="margenIzq">

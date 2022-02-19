@@ -1,9 +1,9 @@
 <?php
-/*if(!isset($_COOKIE["Intentos"])){
-	setcookie("Intentos", 2, time() + 10, "/");// 5 min
-}*/
 require_once 'Funciones/conexion.php';
-
+if (!isset($_COOKIE["intentos"])) {
+	setcookie("intentos", 2, time() + 20, "/");
+	//header("location: login.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -22,20 +22,21 @@ require_once 'Funciones/conexion.php';
 
 <body>
 	<?php
-  if (!isset($_SESSION['Usuario'])) {
-    require 'menu.html';
-  }else{
-    require 'menu.php';
-  }
+	if (!isset($_SESSION['Usuario'])) {
+		require 'menu.html';
+	} else {
+		require 'menu.php';
+	}
 
 	require 'Funciones/comprobarPass.php';
 	?>
-
+	
 	<div class="row medium-6 large-5 columns" id="top">
 		<div class="blog-post">
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-					<span class="error"><?php echo $errorIntentos ?></span>
-				<label style="color: white;"for="Usuario">Nombre de usuario:
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+				<span class="error"><?php echo $errorIntentos ?></span>
+				<label style="color: white;" for="Usuario">Nombre de usuario:
 					<input type="text" id="Usuario" name="Usuario" value="<?php echo $usu ?>">
 					<span class="error"><?php echo $errorNoUsu ?></span>
 				</label>
@@ -48,29 +49,20 @@ require_once 'Funciones/conexion.php';
 			</form>
 		</div>
 	</div>
-	<?php
 
-
-	$_SESSION["con"];
-	//mysqli_close($conn);
-	// Quita los espacios, barras y caracteres especiales para que no pongan una URL
-	function test_input($data)
-	{
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if (!empty($_POST["Usuario"])) {
-			test_input($_POST["Usuario"]);
-		}
-		if (!empty($_POST["Pass"])) {
-			test_input($_POST["Pass"]);
-		}
-	}
-	?>
+	<script src='https://www.google.com/recaptcha/api.js?render=6Ld3aIseAAAAAHa0cRAp_L16YwCR1M-jF0rrY86m'>
+	</script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6Ld3aIseAAAAAHa0cRAp_L16YwCR1M-jF0rrY86m', {
+					action: 'ejemplo'
+				})
+				.then(function(token) {
+					var recaptchaResponse = document.getElementById('recaptchaResponse');
+					recaptchaResponse.value = token;
+				});
+		});
+	</script>
 
 	<script src="js/vendor/jquery-2.1.4.min.js"></script>
 	<script src="js/vendor/foundation.js"> </script>

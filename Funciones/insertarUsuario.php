@@ -111,9 +111,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $fechanac . "', '" . $imgContent . "')";
 
             if ($_SESSION["con"]->query($sql) === TRUE) {
-                echo '<p class="callout success">Te has registrado correctamente</p>';
+                echo '<p style="position:fixed; bottom:-16px; width:100%"; class="callout success">Te has registrado correctamente</p>';
+                
+                // Insertamos la visita
+                $sql = "INSERT INTO visita (IdUsuario, IdPagina)
+                VALUES ('". $usuario ."', 'inicio.php')";
+                $_SESSION["con"]->query($sql);
             } else {
-                echo '<p class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
+                echo '<p style="position:fixed; bottom:-16px; width:100%"; class="callout alert">Todo lo que podia salir mal lo ha hecho, inutil.</p>';
             }
             header("location: login.php");
         } catch (mysqli_sql_exception $errorSQL) {

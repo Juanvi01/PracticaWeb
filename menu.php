@@ -13,7 +13,7 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu" data-responsive-menu="accordion small-dropdown">
-      <li class="bajar"><a href="#">??</a></li>
+      <li class="bajar"><a href="diabetes.php">Info Diabetes</a></li>
       <li class="bajar"><a href="suscripcion.php">Suscripciones</a></li>
 
       <div class="top-bar" id="main-menu">
