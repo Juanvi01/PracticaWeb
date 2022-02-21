@@ -34,7 +34,7 @@ if (!isset($_COOKIE["intentos"])) {
 	<div class="row medium-6 large-5 columns" id="top">
 		<div class="blog-post">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+			<!--input type="hidden" name="recaptcha_response" id="recaptchaResponse"-->
 				<span class="error"><?php echo $errorIntentos ?></span>
 				<label style="color: white;" for="Usuario">Nombre de usuario:
 					<input type="text" id="Usuario" name="Usuario" value="<?php echo $usu ?>">
@@ -50,7 +50,7 @@ if (!isset($_COOKIE["intentos"])) {
 		</div>
 	</div>
 
-	<script src='https://www.google.com/recaptcha/api.js?render=6Ld3aIseAAAAAHa0cRAp_L16YwCR1M-jF0rrY86m'>
+	<!--script src='https://www.google.com/recaptcha/api.js?render=6Ld3aIseAAAAAHa0cRAp_L16YwCR1M-jF0rrY86m'>
 	</script>
 	<script>
 		grecaptcha.ready(function() {
@@ -62,7 +62,7 @@ if (!isset($_COOKIE["intentos"])) {
 					recaptchaResponse.value = token;
 				});
 		});
-	</script>
+	</script-->
 
 	<script src="js/vendor/jquery-2.1.4.min.js"></script>
 	<script src="js/vendor/foundation.js"> </script>

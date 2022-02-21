@@ -25,6 +25,7 @@ require_once 'Funciones/conexion.php';
 		header("location: index.php");
 	}else{
 		require 'menu.php';
+		require 'Funciones/comprobarTiempo.php';
 	}
 	?>
 

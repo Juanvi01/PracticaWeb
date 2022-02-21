@@ -21,6 +21,7 @@ require_once 'Funciones/conexion.php';
     require 'menu.html';
   }else{
     require 'menu.php';
+		require 'Funciones/comprobarTiempo.php';
     // Actualizamos la visita
     $sql = "UPDATE visita 
             SET IdPagina = 'inicio.php' 

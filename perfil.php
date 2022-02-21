@@ -22,6 +22,7 @@ require_once 'Funciones/conexion.php';
         require 'menu.html';
     } else {
         require 'menu.php';
+		require 'Funciones/comprobarTiempo.php';
     }
     require 'Funciones/modificarUsuario.php';
     ?>

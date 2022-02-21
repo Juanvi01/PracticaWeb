@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['Sexo'] = $row["Sexo"];
                             $_SESSION['Avatar'] = $row["Avatar"];
                             $_SESSION['Suscripcion'] = $row["Suscripcion"];
+                            $_SESSION["Duracion"] = time();
 
                             // Hacemos una select para ver la última pag a la que fue el usuario
                             $sql = "SELECT IdPagina from visita where IdUsuario = '" . $usu . "'";
@@ -53,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     setcookie("intentos", $intentos - 1, time() + 20, "/"); // 5 min
                 }
             } else {
-                $errorNoUsu = "Pon uno";
+                $errorNoUsu = "El campo de usuario no puede estar vacio";
+                setcookie("intentos", $intentos - 1, time() + 20, "/"); // 5 min
             }
         } else {
             $errorIntentos = "Has superado el límite de intentos, vuelve a intentarlo en 5 min.";
